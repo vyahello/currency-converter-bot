@@ -22,5 +22,5 @@ class CurrencyConverter(Converter):
             self._currency.from_target(), '_', self._currency.to_target(), '&compact=ultra'))
 
     def value(self) -> float:
-        return self._request.get().json().get('{}_{}'.format(self._currency.from_target(),
-                                                             self._currency.to_target()).upper())
+        return self._currency.amount() * self._request.get().json().get('{}_{}'.format(
+            self._currency.from_target(), self._currency.to_target()).upper())
