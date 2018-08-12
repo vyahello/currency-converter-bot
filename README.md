@@ -1,7 +1,7 @@
 # Currency converter telegram bot
 - Telegram bot powered by a webhook that helps you to convert certain amount of currency.
 
-## Run a movie telegram bot
+## Run a currency converter telegram bot
 Run script from the root directory of the project:
 ```bash
 ~ python bot.py
