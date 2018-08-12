@@ -28,5 +28,5 @@ class CurrencyConverter(Converter):
                                                                    frm=self._currency.from_target(),
                                                                    result=self._currency.amount() * rate.value(),
                                                                    to=self._currency.to_target())
-        return "Please use next pattern: <Amount> <from currency> to <to currency>\n" \
+        return "Please use next pattern: <amount> <from currency> to <to currency>\n" \
                "Example: 100 usd to eur"
