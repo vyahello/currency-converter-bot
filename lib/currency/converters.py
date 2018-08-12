@@ -16,14 +16,17 @@ class CurrencyConverter(Converter):
 
     def __init__(self, source: str) -> None:
         self._currency: Currency = CurrencyPair(source)
-        self._rate: Rate = CurrencyRate(self._currency)
 
     def value(self) -> str:
-        return "{request}\n" \
-               "Initial: 1 {frm} = {initial} {to}\n" \
-               "Result: {amount} {frm} = {result} {to}".format(request=self._currency,
-                                                               amount=self._currency.amount(),
-                                                               initial=self._rate.value(),
-                                                               frm=self._currency.from_target(),
-                                                               result=self._currency.amount() * self._rate.value(),
-                                                               to=self._currency.to_target())
+        if self._currency.match():
+            rate: Rate = CurrencyRate(self._currency)
+            return "{request}\n" \
+                   "Initial: 1 {frm} = {initial} {to}\n" \
+                   "Result: {amount} {frm} = {result} {to}".format(request=self._currency,
+                                                                   amount=self._currency.amount(),
+                                                                   initial=rate.value(),
+                                                                   frm=self._currency.from_target(),
+                                                                   result=self._currency.amount() * rate.value(),
+                                                                   to=self._currency.to_target())
+        return "Please use next pattern: <Amount> <from currency> to <to currency>\n" \
+               "Example: 100 usd to eur"

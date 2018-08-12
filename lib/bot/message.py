@@ -34,7 +34,7 @@ class BotAnswer(Answer):
     def __init__(self, request: requests.Request) -> None:
 
         def _req() -> Dict[Any, Any]:
-            return request.dct().get('message')
+            return request.as_dict().get('message')
 
         self._req: Callable[..., Dict[Any, Any]] = _req
 
@@ -48,9 +48,9 @@ class BotAnswer(Answer):
 class BotMessage(Message):
     """A message of a bot."""
 
-    def __init__(self, chat_id: int, movie: str) -> None:
+    def __init__(self, chat_id: int, source: str) -> None:
         self._chat_id: int = chat_id
-        self._converter: Converter = CurrencyConverter(movie)
+        self._converter: Converter = CurrencyConverter(source)
         self._request: Request = SafeBotRequest(HttpsUrlOf('api.telegram.org/bot', API_KEY, '/sendMessage'))
 
     def send(self) -> Response:

@@ -14,7 +14,7 @@ class Request(ABC):
         pass
 
     @abstractmethod
-    def dct(self) -> Dict[Any, Any]:
+    def as_dict(self) -> Dict[Any, Any]:
         pass
 
 
@@ -27,5 +27,5 @@ class ServerRequest(Request):
     def method(self) -> str:
         return self._request.method
 
-    def dct(self) -> Dict[Any, Any]:
+    def as_dict(self) -> Dict[Any, Any]:
         return self._request.get_json()
