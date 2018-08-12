@@ -1,14 +1,13 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod, ABC
 from lib.currency.currencies import Currency, CurrencyPair
-from lib.web_api.requests import Request, SafeBotRequest
-from lib.web_api.urls import HttpsUrlOf
+from lib.currency.rates import Rate, CurrencyRate
 
 
 class Converter(ABC):
     """Abstract interface for a converter."""
 
     @abstractmethod
-    def value(self) -> float:
+    def value(self) -> str:
         pass
 
 
@@ -17,10 +16,14 @@ class CurrencyConverter(Converter):
 
     def __init__(self, source: str) -> None:
         self._currency: Currency = CurrencyPair(source)
-        self._request: Request = SafeBotRequest(HttpsUrlOf(
-            'free.currencyconverterapi.com/api/v6/convert?q=',
-            self._currency.from_target(), '_', self._currency.to_target(), '&compact=ultra'))
+        self._rate: Rate = CurrencyRate(self._currency)
 
-    def value(self) -> float:
-        return self._currency.amount() * self._request.get().json().get('{}_{}'.format(
-            self._currency.from_target(), self._currency.to_target()).upper())
+    def value(self) -> str:
+        return "{request}\n" \
+               "Initial: 1 {frm} = {initial} {to}\n" \
+               "Result: {amount} {frm} = {result} {to}".format(request=self._currency,
+                                                               amount=self._currency.amount(),
+                                                               initial=self._rate.value(),
+                                                               frm=self._currency.from_target(),
+                                                               result=self._currency.amount() * self._rate.value(),
+                                                               to=self._currency.to_target())

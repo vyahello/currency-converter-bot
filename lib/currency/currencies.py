@@ -32,3 +32,6 @@ class CurrencyPair(Currency):
 
     def to_target(self) -> str:
         return self._source.split()[3]
+
+    def __str__(self) -> str:
+        return f"Request: convert {self._source}"
