@@ -8,7 +8,13 @@ Run script from the root directory of the project:
 ```
 
 ## Demo
-![Screenshot](lib/demo/bot.png)
+![Screenshot](lib/demo/bot.jpg)
+
+## Run unittests
+Run script from the root directory of the project:
+```bash
+~ pytest -s -v
+```
 
 ## Contributing
 
