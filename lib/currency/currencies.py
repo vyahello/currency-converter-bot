@@ -61,13 +61,13 @@ class CurrencyPair(Currency):
         return self._source.match()
 
     def amount(self) -> int:
-        return int(self.match()[0])
+        return int(self.match()[0]) if self.match() else None
 
     def from_target(self) -> str:
-        return self.match()[1]
+        return self.match()[1] if self.match() else None
 
     def to_target(self) -> str:
-        return self.match()[3]
+        return self.match()[3] if self.match() else None
 
     def __str__(self) -> str:
         return str(self._source)
