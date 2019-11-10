@@ -1,6 +1,7 @@
 # Currency converter telegram bot
-- Telegram bot powered by a webhook that helps you to convert certain amount of currency.
-- Telegram bot is called `@exchange_converter_bot`, search for in in a telegram app.
+Telegram bot powered by a webhook that helps you to convert certain amount of currency.
+
+Telegram bot is called `@exchange_converter_bot`, search for in in a telegram app.
 
 ## Run a currency converter telegram bot
 Run script from the root directory of the project:
